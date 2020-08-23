@@ -12,25 +12,17 @@
     new Audio("sounds/Kitty-meows.mp3"),
     new Audio("sounds/Meowing-cat-sound.mp3"),
     new Audio("sounds/Original-cat-sound.mp3"),
-    new Audio(`528192__fthgurdy__cat-meow-5.wav`),
-    new Audio(`448084__breviceps__cute-kitten-meow.mp3`)
+    new Audio("sounds/528192__fthgurdy__cat-meow-5.mp3"),
+    new Audio("sounds/448084__breviceps__cute-kitten-meow.mp3")
   ];
   shuffle(audio);
   let whiteSounds = audio.slice(0, 8);
   let blackSounds = audio.slice(8, 8 + 4);
 
-  let highlightedButtonWhite = null;
-
   function clickedWhite(index) {
     console.log("WHITE", index);
-    highlightedButtonWhite = index;
     whiteSounds[index].volume = 0.1;
     whiteSounds[index].currentTime = 0;
-    whiteSounds[index].addEventListener("ended", () => {
-      if (highlightedButtonWhite === index) {
-        highlightedButtonWhite = null;
-      }
-    });
     whiteSounds[index].play();
   }
   function clickedBlack(index) {
@@ -46,19 +38,25 @@
     display: flex;
     justify-content: stretch;
     align-items: center;
-    min-height: 100%;
+    height: calc(100vh - 20px);
     padding: 10px;
   }
+
   .whiteKey {
     flex: 1;
     height: 250px;
     background-color: white;
     position: relative;
     border: 1px solid black;
+    box-shadow: 0px 15px 0px 0px #d9d9d9;
+    transition: 0.2s;
   }
-  .whiteKey.highlighted {
-    background-color: red;
+
+  .whiteKey:active:focus {
+    transform: translateY(14px);
+    box-shadow: 0px 1px 0px 0px #d9d9d9;
   }
+
   .blackKey {
     position: absolute;
     height: 150px;
@@ -68,10 +66,23 @@
     background-color: black;
     border: grey 1px solid;
     box-shadow: 0px 15px 0px 0px #999999;
+    transition: 0.2s;
   }
+
+  .blackKey:active:focus {
+    transform: translateY(14px);
+    box-shadow: 0px 1px 0px 0px #999999;
+  }
+
   .whiteKey:nth-child(2n) .blackKey {
     top: 0;
     left: 0;
+  }
+  .container:active:focus {
+    background-color: pink;
+  }
+  :focus {
+    outline: none;
   }
 </style>
 
@@ -80,10 +91,11 @@
     <div
       class="whiteKey"
       on:click|stopPropagation={() => clickedWhite(index)}
-      class:highlighted={highlightedButtonWhite === index}>
+      tabindex={100 + index}>
       <div
         class="blackKey"
-        on:click|stopPropagation={() => clickedBlack(Math.floor(index / 2))} />
+        on:click|stopPropagation={() => clickedBlack(Math.floor(index / 2))}
+        tabindex={200 + index} />
     </div>
   {/each}
 </div>
