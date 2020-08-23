@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "gh-pages": "^2.0.1",
+    "shuffle-array": "^1.0.1",
     "sirv-cli": "^0.4.4"
   }
 }
