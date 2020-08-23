@@ -21,13 +21,13 @@
 
   function clickedWhite(index) {
     console.log("WHITE", index);
-    whiteSounds[index].volume = 0.1;
+    // whiteSounds[index].volume = 0.1;
     whiteSounds[index].currentTime = 0;
     whiteSounds[index].play();
   }
   function clickedBlack(index) {
     console.log("BLACK", index);
-    blackSounds[index].volume = 0.1;
+    // blackSounds[index].volume = 0.1;
     blackSounds[index].currentTime = 0;
     blackSounds[index].play();
   }
@@ -36,7 +36,7 @@
 <style>
   div.container {
     display: flex;
-    justify-content: stretch;
+    justify-content: center;
     align-items: center;
     height: calc(100vh - 20px);
     padding: 10px;
@@ -50,6 +50,7 @@
     border: 1px solid black;
     box-shadow: 0px 15px 0px 0px #d9d9d9;
     transition: 0.2s;
+    max-width: 100px;
   }
 
   .whiteKey:active:focus {
