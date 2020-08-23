@@ -11,38 +11,63 @@
     new Audio("sounds/Cute-cat-meowing-on-the-street.mp3"),
     new Audio("sounds/Kitty-meows.mp3"),
     new Audio("sounds/Meowing-cat-sound.mp3"),
-    new Audio("sounds/Original-cat-sound.mp3")
+    new Audio("sounds/Original-cat-sound.mp3"),
+    new Audio(`528192__fthgurdy__cat-meow-5.wav`),
+    new Audio(`448084__breviceps__cute-kitten-meow.mp3`)
   ];
   shuffle(audio);
+  let whiteSounds = audio.slice(0, 8);
+  let blackSounds = audio.slice(8, 8 + 4);
 
-  function clicked(index) {
-    audio[index].currentTime = 0;
-    audio[index].play();
-    // console.log("PLAY", index);
+  let highlightedButtonWhite = null;
+
+  function clickedWhite(index) {
+    console.log("WHITE", index);
+    highlightedButtonWhite = index;
+    whiteSounds[index].volume = 0.1;
+    whiteSounds[index].currentTime = 0;
+    whiteSounds[index].addEventListener("ended", () => {
+      if (highlightedButtonWhite === index) {
+        highlightedButtonWhite = null;
+      }
+    });
+    whiteSounds[index].play();
+  }
+  function clickedBlack(index) {
+    console.log("BLACK", index);
+    blackSounds[index].volume = 0.1;
+    blackSounds[index].currentTime = 0;
+    blackSounds[index].play();
   }
 </script>
 
 <style>
+  div.container {
+    display: flex;
+    justify-content: stretch;
+    align-items: center;
+    min-height: 100%;
+    padding: 10px;
+  }
   .whiteKey {
+    flex: 1;
     height: 250px;
     background-color: white;
     position: relative;
     border: 1px solid black;
   }
-  div.container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100%;
+  .whiteKey.highlighted {
+    background-color: red;
   }
   .blackKey {
     position: absolute;
-    height: 130px;
-    width: 15px;
+    height: 150px;
+    width: 20px;
     top: 0;
     right: 0;
     background-color: black;
     border: grey 1px solid;
+    box-shadow: 0px 15px 0px 0px #999999;
   }
   .whiteKey:nth-child(2n) .blackKey {
     top: 0;
@@ -51,44 +76,14 @@
 </style>
 
 <div class="container">
-  <div class="whiteKey" on:click|stopPropagation={() => clicked(0)}>
-    <div class="blackKey" on:click|stopPropagation={() => clicked(0 * 0 + 7)} />
-    Meow 1
-  </div>
-  <div class="whiteKey" on:click|stopPropagation={() => clicked(1)}>
-    <div class="blackKey" on:click|stopPropagation={() => clicked(1 * 0 + 7)} />
-    Meow 2
-  </div>
-  <div class="whiteKey" on:click|stopPropagation={() => clicked(2)}>
-    <div class="blackKey" on:click|stopPropagation={() => clicked(2 * 0 + 7)} />
-    Meow 3
-  </div>
-  <div class="whiteKey" on:click|stopPropagation={() => clicked(3)}>
-    <div class="blackKey" on:click|stopPropagation={() => clicked(3 * 0 + 7)} />
-    Meow 4
-  </div>
-  <div class="whiteKey" on:click|stopPropagation={() => clicked(4)}>
-    <div class="blackKey" on:click|stopPropagation={() => clicked(4 * 0 + 7)} />
-    Meow 5
-  </div>
-  <div class="whiteKey" on:click|stopPropagation={() => clicked(5)}>
-    <div class="blackKey" on:click|stopPropagation={() => clicked(5 * 0 + 7)} />
-    Meow 6
-  </div>
-  <div class="whiteKey" on:click|stopPropagation={() => clicked(6)}>
-    <div class="blackKey" on:click|stopPropagation={() => clicked(6 * 0 + 7)} />
-    Meow 7
-  </div>
-  <div class="whiteKey" on:click|stopPropagation={() => clicked(7)}>
-    <div class="blackKey" on:click|stopPropagation={() => clicked(7 * 0 + 7)} />
-    Meow 8
-  </div>
-  <div class="whiteKey" on:click|stopPropagation={() => clicked(8)}>
-    <div class="blackKey" on:click|stopPropagation={() => clicked(8 * 0 + 7)} />
-    Meow 9
-  </div>
-  <div class="whiteKey" on:click|stopPropagation={() => clicked(9)}>
-    <div class="blackKey" on:click|stopPropagation={() => clicked(9 * 0 + 7)} />
-    Meow 10
-  </div>
+  {#each whiteSounds as sound, index}
+    <div
+      class="whiteKey"
+      on:click|stopPropagation={() => clickedWhite(index)}
+      class:highlighted={highlightedButtonWhite === index}>
+      <div
+        class="blackKey"
+        on:click|stopPropagation={() => clickedBlack(Math.floor(index / 2))} />
+    </div>
+  {/each}
 </div>

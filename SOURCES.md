@@ -12,3 +12,5 @@
 - `Kitty-meows.mp3` - http://www.orangefreesounds.com/kitty-meows/
 - `Meowing-cat-sound.mp3` - http://www.orangefreesounds.com/meowing-cat-sound-effect/
 - `Original-cat-sound.mp3` - http://www.orangefreesounds.com/original-cat-sound/
+- `528192__fthgurdy__cat-meow-5.wav` - https://freesound.org/people/fthgurdy/sounds/528192/
+- `448084__breviceps__cute-kitten-meow.mp3` - https://freesound.org/people/Breviceps/sounds/448084/
