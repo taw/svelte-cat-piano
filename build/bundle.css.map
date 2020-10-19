@@ -2,9 +2,9 @@
   "version": 3,
   "file": "bundle.css",
   "sources": [
-    "../../App.svelte",
-    "../../BlackKey.svelte",
-    "../../WhiteKey.svelte"
+    "App.svelte",
+    "BlackKey.svelte",
+    "WhiteKey.svelte"
   ],
   "sourcesContent": [
     "<script>\n  import WhiteKey from \"./WhiteKey.svelte\";\n  import BlackKey from \"./BlackKey.svelte\";\n  import shuffle from \"shuffle-array\";\n\n  let audio = [\n    new Audio(\"sounds/Kitten_Meow-SoundBible.com-1295572573.mp3\"),\n    new Audio(\"sounds/110011__tuberatanka__cat-meow.mp3\"),\n    new Audio(\"sounds/362652__trngle__cat-meow.mp3\"),\n    new Audio(\"sounds/446025__sophiemezam__meow.mp3\"),\n    new Audio(\"sounds/Cat-meow-noise.mp3\"),\n    new Audio(\"sounds/Cat-meowing-loudly.mp3\"),\n    new Audio(\"sounds/Cute-cat-meowing-on-the-street.mp3\"),\n    new Audio(\"sounds/Kitty-meows.mp3\"),\n    new Audio(\"sounds/Meowing-cat-sound.mp3\"),\n    new Audio(\"sounds/Original-cat-sound.mp3\"),\n    new Audio(\"sounds/528192__fthgurdy__cat-meow-5.mp3\"),\n    new Audio(\"sounds/448084__breviceps__cute-kitten-meow.mp3\")\n  ];\n  shuffle(audio);\n  let whiteSounds = audio.slice(0, 8);\n  let blackSounds = audio.slice(8, 8 + 4);\n</script>\n\n<style>\n  div.container {\n    width: calc(100vw - 20px);\n    height: calc(100vh - 20px);\n    padding: 10px;\n    position: relative;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n  }\n  .piano {\n    width: calc(100vw - 20px);\n    height: 300px;\n    max-width: 800px;\n  }\n  .white-keys {\n    position: absolute;\n    width: calc(100vw - 20px);\n    height: 300px;\n    max-width: 800px;\n    display: flex;\n    justify-content: stretch;\n    align-items: flex-start;\n  }\n  .black-keys {\n    position: absolute;\n    width: calc(100vw - 20px);\n    height: 300px;\n    max-width: 800px;\n    display: flex;\n    justify-content: stretch;\n    align-items: flex-start;\n    pointer-events: none;\n  }\n  .gap {\n    width: 65px;\n    flex: 1 1 65px;\n  }\n</style>\n\n<div class=\"container\">\n  <div class=\"piano\">\n    <div class=\"white-keys\">\n      {#each whiteSounds as sound}\n        <WhiteKey audio={sound} />\n      {/each}\n    </div>\n    <div class=\"black-keys\">\n      {#each blackSounds as sound}\n        <div class=\"gap\" />\n        <BlackKey audio={sound} />\n        <div class=\"gap\" />\n      {/each}\n    </div>\n  </div>\n</div>\n",
